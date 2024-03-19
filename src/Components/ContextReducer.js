@@ -14,9 +14,6 @@ const reducer=(st,act)=>{
             let nar1=[...st];
             nar1.splice(act.index,1);
             return [...nar1,{id:act.id,email:act.email,description:act.description}]
-        case "CHECKOUT":
-            localStorage.setItem("Note",JSON.stringify(st));
-            return [];
 
         default:
             console.log('Error in Reducer')

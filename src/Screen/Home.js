@@ -6,11 +6,12 @@ import axios from 'axios'
 export default function Home() { 
     const [notedata, setnotedata] = useState([]) 
     const [credentials , setcredentials] = useState("") 
-    var userEmail=localStorage.getItem("userEmail");
+    var userEmail=localStorage.getItem("userEmail"); 
     const deleteNote = async (id) => {
         try {
             await axios.delete(`http://localhost:5000/api/deleteNote/${id}`);
-            setnotedata(notedata.filter(note => note._id !== id));
+            // setnotedata(notedata.filter(note => note._id !== id));
+            loadData(userEmail);
         } catch (error) {
             console.error('Error deleting note:', error);
         }
@@ -69,6 +70,7 @@ export default function Home() {
     }
     const handleWord=()=>{
         let p=credentials;
+        p=p.toLowerCase();
         setcredentials(p.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase()));
     }
     const handleClear=()=>{
