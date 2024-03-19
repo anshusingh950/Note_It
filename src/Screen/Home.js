@@ -9,7 +9,7 @@ export default function Home() {
     var userEmail=localStorage.getItem("userEmail"); 
     const deleteNote = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/api/deleteNote/${id}`);
+            await axios.delete(`http://localhost:5001/api/deleteNote/${id}`);
             // setnotedata(notedata.filter(note => note._id !== id));
             loadData(userEmail);
         } catch (error) {
