@@ -18,7 +18,7 @@ export default function Home() {
         };
     const handleAdd = async (e) => {
         e.preventDefault();
-        const response = await fetch("http://localhost:5000/api/addnotes", {
+        const response = await fetch("http://localhost:5001/api/addnotes", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -36,7 +36,7 @@ export default function Home() {
         }
     }
     const loadData = async (userEmail) => {
-        let dt = await fetch(`http://localhost:5000/api/getdata/${userEmail}`, {
+        let dt = await fetch(`http://localhost:5001/api/getdata/${userEmail}`, {
             method: "POST",
             headers: {
                 "Content-Type": 'application/json'
