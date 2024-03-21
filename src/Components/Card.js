@@ -1,10 +1,5 @@
 import React from 'react'
-import {useNote,useDispatchNote} from './ContextReducer'
 export default function Card(props) {
-    const dispatch=useDispatchNote();
-    const del=async()=>{
-        await props.onDel(props.id)
-    }
     
     return (
         <div>
@@ -14,7 +9,6 @@ export default function Card(props) {
                     <p>Date:{props.dt}</p>
 
                 </div>
-                <button onClick={del}>DELETE</button>
             </div>
         </div>
     )

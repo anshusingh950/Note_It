@@ -1,16 +1,17 @@
-const mongoose=require('mongoose');
-const monuri='mongodb+srv://anshu8877947678:atlas123@cluster0.pr6de2v.mongodb.net/NoteBook?retryWrites=true&w=majority'
-const connectToMongo=async()=>{
-    try{ 
-        mongoose.set("strictQuery",false);
-        await mongoose.connect(monuri);
-        console.log("Connected to Mongodb_NoteBook");
-        // const fetched_data1=await mongoose.connection.db.collection('notes');        
-        // global.notes=await fetched_data1.find({}).toArray();
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    database: 'db'
+});
+
+connection.connect((err) => {
+    if (err) {
+        console.error('Error connecting to MySQL: ', err);
+        return;
     }
-    catch(error){
-        console.log(`Error in connecting to MongoDB ${error}`);
-        process.exit();
-    }    
-}
-module.exports=connectToMongo;
+    console.log('Connected to MySQL database');
+});
+
+module.exports = connection;

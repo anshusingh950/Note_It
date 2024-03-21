@@ -1,27 +1,28 @@
-const express=require('express')
-const router=express.Router();
-const { body, validationResult } = require('express-validator');
-const Notes=require("../models/Notes")
-router.post("/addnotes" ,[
-    body("email","Please Login to add notes").isEmail().withMessage("Please Login to add notes"),
-    body('description',"Description can't be set to empty").isLength({min:1})
-    ],async (req,res)=>{    
-        const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({errors:errors.array()});
-    }
-       
-    try {
-        await Notes.create({
-            email:req.body.email,
-            description:req.body.description,
-            date:Date.now()
-        }).then(res.json({success:true})) 
-    } 
-     catch (error) {
-        console.log(error)
-        res.json({success:false});
-    }
-})
+const db = require('../db');
 
-module.exports=router 
+exports.submitSnippet = (req, res) => {
+  const { username, language, stdin, sourcecode } = req.body;
+  const snippet = { username, language, stdin, sourcecode };
+  db.query('INSERT INTO table1 SET ?', snippet, (err, result) => {
+    if (err) {
+      console.error('Error submitting snippet:', err);
+      res.status(500).send('Error submitting snippet');
+      return;
+    }
+    console.log('Snippet submitted:', result);
+    res.sendStatus(201);
+  });
+};
+
+exports.getAllEntries = (req, res) => {
+  db.query('SELECT * FROM table1', (err, results) => {
+    if (err) {
+      console.error('Error fetching entries:', err);
+      res.status(500).send('Error fetching entries');
+      return;
+    }
+    console.log(results);
+
+    res.json(results);
+  });
+};

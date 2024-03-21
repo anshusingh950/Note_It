@@ -1,14 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 export default function Navbar() {
-    var token=localStorage.getItem("authToken");
-    let navigate=useNavigate();
-    const handleLogout = async (e) => {
-        e.preventDefault();
-        localStorage.removeItem("authToken");
-        localStorage.removeItem("userEmail");
-        navigate('/Login');
-    }
+    
     return (
         <div>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -24,17 +17,11 @@ export default function Navbar() {
                             </li>
 
                         </ul>
-                        {
-                            token?
-                             <div className='d-flex'>
-                            
-                            <p className=" btn text-white fs-5 mx-2 p-1" style={{ background: '#3F51B5' }} onClick={handleLogout}>LogOut</p>
+                        <div className='d-flex'>
+                            <Link className="btn text-white fs-5 mx-2 p-1" style={{ background: '#3F51B5' }} to="/GetData">GetData</Link>
+                            <Link className=" btn text-white fs-5 mx-2 p-1" style={{ background: '#3F51B5' }} to="/PutData">PutData</Link>
                         </div>   
-                            : <div className='d-flex'>
-                            <Link className="btn text-white fs-5 mx-2 p-1" style={{ background: '#3F51B5' }} to="/Signup">Signup</Link>
-                            <Link className=" btn text-white fs-5 mx-2 p-1" style={{ background: '#3F51B5' }} to="/Login">Login</Link>
-                        </div>   
-                        }
+                        
                                
                     </div>
                 </div>

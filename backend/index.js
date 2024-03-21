@@ -1,23 +1,14 @@
-const express = require('express')
-const app = express() 
+const express = require('express');
+const snippetController = require('./routes/notes');
+const connection = require('./db');
+const app = express();
+const port = 5000; 
 const cors=require('cors')
-const port = 5001
-const mongoDB=require("./db")
-mongoDB();
-app.use(cors())
-app.use((req,res,next)=>{
-    res.setHeader("Access-Control-Allow-Origin","*");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin,X-Requested-With,Content-Type,Accept"
-    );
-    next();
-})
+
 app.use(express.json());
-app.use('/api',require('./routes/auth'));
-app.use('/api',require('./routes/notes'));
-app.use('/api',require('./routes/Displaydata'));
-app.use('/api',require('./routes/DeleteData'));
+app.use(cors());
+app.post('/api/putdata', snippetController.submitSnippet);
+app.get('/api/getdata', snippetController.getAllEntries);
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+    console.log(`Server is running on port ${port}`);
+});

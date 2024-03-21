@@ -1,7 +1,7 @@
 import './App.css';
-import Home from "./Screen/Home"
-import Login from "./Screen/Login"
-import Signup from "./Screen/Signup"
+import GetData from "./Screen/GetData"
+import PutData from "./Screen/PutData"
+
 import {BrowserRouter as Router,Route, Routes} from "react-router-dom";
 
 function App() {
@@ -9,9 +9,9 @@ function App() {
         <Router>
             <div>
                 <Routes>
-                <Route exact path="/" element={<Home/>}  />
-                <Route exact path="/Login" element={<Login/>}  />
-                <Route exact path="/Signup" element={<Signup/>}  />
+                <Route exact path="/GetData" element={<GetData/>}  />
+                <Route exact path="/PutData" element={<PutData/>}  />
+                <Route exact path="/" element={<PutData/>}  />
                 </Routes>
             </div>
         </Router>
